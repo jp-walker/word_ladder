@@ -1,6 +1,7 @@
 #!/bin/python3
 from collections import deque
 
+
 def verify_word_ladder(ladder):
     '''
     Returns True if each entry of the input list is adjacent to its neighbors;
@@ -19,9 +20,9 @@ def verify_word_ladder(ladder):
         if ladder[i] == ladder[i + 1]:
             return True
         if not _adjacent(ladder[i], ladder[i + 1]):
-             return False
+            return False
     return True
-        
+
 
 def _adjacent(word1, word2):
     '''
@@ -64,12 +65,14 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     ```
     may give the output
     ```
-    ['stone', 'shone', 'phone', 'phony', 'peony', 'penny', 'benny', 'bonny', 'boney', 'money']
+    ['stone', 'shone', 'phone', 'phony', 'peony', 'penny',
+    'benny', 'bonny', 'boney', 'money']
     ```
     but the possible outputs are not unique,
     so you may also get the output
     ```
-    ['stone', 'shone', 'shote', 'shots', 'soots', 'hoots', 'hooty', 'hooey', 'honey', 'money']
+    ['stone', 'shone', 'shote', 'shots', 'soots', 'hoots',
+    'hooty', 'hooey', 'honey', 'money']
     ```
     (We cannot use doctests here because the outputs are not unique.)
 
@@ -78,21 +81,16 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     '''
 
     dictionary = open(dictionary_file).readlines()
-    words = list(set([ word.strip() for word in dictionary ]))
+    words = list(set([word.strip() for word in dictionary]))
     if len(start_word) != len(end_word):
         return None
-    
+
     if start_word == end_word:
         return [start_word]
     stack = []
     stack.append(start_word)
     queue = deque()
     queue.append(stack)
-    
-    # Create a stack
-    # Push the start word onto the stack
-    # Create a queue
-    # Enqueue the stack onto the queue
 
     while len(queue) != 0:
         current = queue[0]
@@ -107,17 +105,3 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
         queue.popleft()
 
     return None
-
-
-print(word_ladder('stone','money'))
-    #  While the queue is not empty
-    # Dequeue a stack from the queue
-    # For each word in the dictionary
-    #   If the word is adjacent to the top of the stack
-    #       If this word is the end word
-    #           You are done!
-    #           The front stack plus this word is your word ladder.
-    #       Make a copy of the stack
-    #       Push the found word onto the copy
-    #       Enqueue the copy
-    #       Delete word from the dictionary
